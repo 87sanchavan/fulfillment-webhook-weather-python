@@ -29,6 +29,8 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+import logging
+
 # Flask app should start in global layout
 app = Flask(__name__)
 
@@ -47,6 +49,7 @@ def getwebhook3():
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
+     logging.info("in webhook")
 
     print("Request:")
     print(json.dumps(req, indent=4))
@@ -126,7 +129,10 @@ def makeWebhookResult(data):
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
-
-    print("Starting app on port %d" % port)
+    logfile='weather.log'
+    logging.basicConfig(level=logging.INFO, filename=logfile,
+                                filemode="a+", format="%(asctime)-15s %(levelname)-8s %(message)s")
+    
+    logging.info("Starting app on port %d" % port)
 
     app.run(debug=False, port=port, host='0.0.0.0')
