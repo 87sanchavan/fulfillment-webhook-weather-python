@@ -56,7 +56,10 @@ def webhook():
     print("Request:")
     print(json.dumps(req, indent=4))
 
-    res = processRequest(req)
+    if req.get("result").get("action") == 'salary_check':
+        res = processSalary(req)
+    else
+        res = processRequest(req)
 
     res = json.dumps(res, indent=4)
     # print(res)
@@ -64,6 +67,23 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
+def processSalary(req):
+    result = req.get("result")
+    parameters = result.get("parameters")
+    salary = parameters.get("salary")
+    if salary >= 25000 :
+        speech ='You are eligible for Loan'
+    else:
+        speech ='We are sorry, You are not eligible for Loan'
+    
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
+    
 
 def processRequest(req):
     if req.get("result").get("action") != "yahooWeatherForecast":
