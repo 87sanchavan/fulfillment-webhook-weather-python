@@ -36,6 +36,10 @@ app = Flask(__name__)
 def getwebhook():
     return 'Hello Webhook'
 
+@app.route('/', methods=['GET'])
+def getwebhook():
+    return 'Hello Webhook default method'
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
