@@ -30,6 +30,7 @@ from flask import request
 from flask import make_response
 
 import logging
+from logging.handlers import RotatingFileHandler
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -44,12 +45,13 @@ def getwebhook2():
 
 @app.route('/test', methods=['GET'])
 def getwebhook3():
+    app.logger.info('in test')
     return 'Hello Webhook Test'
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
-    logging.debug("in webhook")
+    app.logger.info('in webhook")
 
     print("Request:")
     print(json.dumps(req, indent=4))
@@ -129,10 +131,15 @@ def makeWebhookResult(data):
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
-    logfile='weather.log'
-    logging.basicConfig(level=logging.INFO, filename=logfile,
-                                filemode="a+", format="%(asctime)-15s %(levelname)-8s %(message)s")
+    logHandler = RotatingFileHandler('info.log', maxBytes=1000, backupCount=1)
     
-    logging.debug("Starting app on port %d" % port)
+    # set the log handler level
+    logHandler.setLevel(logging.INFO)
 
+    # set the app logger level
+    app.logger.setLevel(logging.INFO)
+
+    app.logger.addHandler(logHandler)  
+
+    app.logger.info('Hiii.. app started')
     app.run(debug=True, port=port, host='0.0.0.0')
