@@ -58,7 +58,7 @@ def webhook():
 
     if req.get("result").get("action") == 'salary_check':
         res = processSalary(req)
-    else
+    else:
         res = processRequest(req)
 
     res = json.dumps(res, indent=4)
