@@ -131,7 +131,7 @@ def makeWebhookResult(data):
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
-    logHandler = RotatingFileHandler('info.log', maxBytes=1000, backupCount=1)
+    logHandler = RotatingFileHandler('/app/info.log', maxBytes=1000, backupCount=1)
     
     # set the log handler level
     logHandler.setLevel(logging.INFO)
