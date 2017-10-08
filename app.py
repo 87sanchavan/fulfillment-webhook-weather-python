@@ -33,15 +33,15 @@ from flask import make_response
 app = Flask(__name__)
 
 @app.route('/webhook', methods=['GET'])
-def getwebhook():
+def getwebhook1():
     return 'Hello Webhook'
 
 @app.route('/', methods=['GET'])
-def getwebhook():
+def getwebhook2():
     return 'Hello Webhook Default url'
 
 @app.route('/test', methods=['GET'])
-def getwebhook():
+def getwebhook3():
     return 'Hello Webhook Test'
 
 @app.route('/webhook', methods=['POST'])
