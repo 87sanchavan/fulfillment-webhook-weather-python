@@ -38,7 +38,7 @@ def getwebhook():
 
 @app.route('/', methods=['GET'])
 def getwebhook():
-    return 'Hello Webhook default method'
+    return 'Hello Webhook Default url'
 
 
 @app.route('/webhook', methods=['POST'])
