@@ -49,7 +49,7 @@ def getwebhook3():
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
-    logging.info("in webhook")
+    logging.debug("in webhook")
 
     print("Request:")
     print(json.dumps(req, indent=4))
@@ -133,6 +133,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, filename=logfile,
                                 filemode="a+", format="%(asctime)-15s %(levelname)-8s %(message)s")
     
-    logging.info("Starting app on port %d" % port)
+    logging.debug("Starting app on port %d" % port)
 
-    app.run(debug=False, port=port, host='0.0.0.0')
+    app.run(debug=True, port=port, host='0.0.0.0')
