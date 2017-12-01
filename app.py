@@ -41,7 +41,7 @@ def getwebhook1():
 
 @app.route('/', methods=['GET'])
 def getwebhook2():
-    return 'Hello Webhook Default url .. changed on 1st dec 2017 at 3.50 pm'
+    return 'Hello Webhook Default url .. changed on 1st dec 2017 at 4.05 pm'
 
 @app.route('/test', methods=['GET'])
 def getwebhook3():
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     
     # set the log handler level
     logHandler.setLevel(logging.INFO)
-
+    print('hello... welcome to this app... have a nice day!!')
     # set the app logger level
     app.logger.setLevel(logging.INFO)
 
