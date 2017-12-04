@@ -47,13 +47,13 @@ def getwebhook2():
 
 @app.route('/test', methods=['GET'])
 def getwebhook3():
-    app.logger.info('in test')
+    print('in test')
     return 'Hello Webhook Test'
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
-    app.logger.info("in webhook")
+    print("in webhook")
 
     print("Request:")
     print(json.dumps(req, indent=4))
