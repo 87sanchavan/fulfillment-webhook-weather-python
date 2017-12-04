@@ -42,7 +42,7 @@ def getwebhook1():
 
 @app.route('/', methods=['GET'])
 def getwebhook2():
-    return 'Hello Webhook Default url .. changed on 1st dec 2017 at 4.05 pm'
+    return 'Hello Webhook Default url .. changed on 4th dec 2017 at 4.05 pm'
 
 @app.route('/test', methods=['GET'])
 def getwebhook3():
