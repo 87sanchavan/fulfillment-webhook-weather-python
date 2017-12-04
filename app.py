@@ -28,6 +28,7 @@ import os
 from flask import Flask
 from flask import request
 from flask import make_response
+import sys
 
 import logging
 from logging.handlers import RotatingFileHandler
@@ -65,6 +66,7 @@ def webhook():
     # print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
+    sys.stdout.flush()
     return r
 
 def processSalary(req):
@@ -83,7 +85,7 @@ def processSalary(req):
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
-    
+    sys.stdout.flush()
 
 def processRequest(req):
     if req.get("result").get("action") != "yahooWeatherForecast":
@@ -96,6 +98,7 @@ def processRequest(req):
     result = urlopen(yql_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
+    sys.stdout.flush()
     return res
 
 
@@ -105,7 +108,7 @@ def makeYqlQuery(req):
     city = parameters.get("geo-city")
     if city is None:
         return None
-
+    sys.stdout.flush()
     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
 
@@ -139,7 +142,7 @@ def makeWebhookResult(data):
 
     print("Response:")
     print(speech)
-
+    sys.stdout.flush()
     return {
         "speech": speech,
         "displayText": speech,
@@ -162,4 +165,6 @@ if __name__ == '__main__':
     app.logger.addHandler(logHandler)  
 
     app.logger.info('Hiii.. app started')
+    sys.stdout.flush()
     app.run(debug=True, port=port, host='0.0.0.0')
+    
